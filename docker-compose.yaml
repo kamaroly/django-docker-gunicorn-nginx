@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  # Django application service
+  django_gunicorn:
+    volumes:
+      - static:/static 
+
+    env_file:
+      - .env
+    build: 
+      context: .
+    
+    ports:
+      - "8000:8000"
+  
+  # Nginx application service
+  nginx:
+    build: ./nginx
+
+    volumes:
+      - static:/static
+    ports:
+      - "80:80"
+    depends_on:
+      - django_gunicorn 
+  
+  # Volumes to host static files
+volumes:
+  static:
