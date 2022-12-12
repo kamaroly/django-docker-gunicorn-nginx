@@ -6,9 +6,9 @@ COPY ./requirements.txt .
 
 RUN pip install -r requirements.txt 
 
-COPY ./starter /app/
+COPY . /app
 
-WORKDIR /app 
+WORKDIR /app
 
 COPY ./entrypoint.sh /
 
